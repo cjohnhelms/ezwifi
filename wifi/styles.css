@@ -1,0 +1,9 @@
+.padding
+{
+margin-top: 500px;
+text-align: center;
+width: 350px;
+height: 350px;
+padding: 10px 10px 10px 10px;
+border: 5px solid black;
+}
