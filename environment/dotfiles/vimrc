@@ -1,0 +1,25 @@
+" Indention
+set autoindent
+set smarttab
+set tabstop=4
+
+" Search
+set hlsearch
+set ignorecase
+set smartcase
+
+" Text
+syntax enable
+
+" UI
+set ruler
+set number
+set noerrorbells
+set title
+
+" Git commit line wrap
+au FileType gitcommit setlocal tw=72
+
+" Auto intdent for yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+let g:indentLine_char = '⦙'
