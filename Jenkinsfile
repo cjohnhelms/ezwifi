@@ -56,7 +56,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                    sh 'docker login -u ${env.dockerHubUser} -p ${dockerHubPassword} docker.io'
+                    sh 'docker login -u ${dockerHubUser} -p ${dockerHubPassword} docker.io'
                 }
                 sh 'docker push docker.io/cjohnhelms/${NAME}:latest'
                 sh 'docker push docker.io/cjohnhelms/${NAME}:${VERSION}'
