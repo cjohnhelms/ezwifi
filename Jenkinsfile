@@ -44,7 +44,7 @@ pipeline {
                     echo 'Testing..'
                     sh 'docker run -d -p 8000:80 --name wifi docker.io/cjohnhelms/wifi-webserver:latest'
                     try {
-                        httpRequest ignoreSslErrors: true, responseHandle: 'NONE', url: '192.168.1.100:8000', wrapAsMultipart: false
+                        sh 'curl 192.168.1.101:8000'
                     } catch (err) {
                         echo 'Container not running as expected'
                         currentBuild.result = 'FAILURE'
