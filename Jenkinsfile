@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     echo 'Testing..'
-                    sh 'docker run -d --name wifi -p 8000:80 docker.io/cjohnhelms/${NAME}:latest'
+                    sh 'docker run -d -p 8000:80 --name wifi docker.io/cjohnhelms/wifi-webserver:latest'
                     try {
                         httpRequest ignoreSslErrors: true, responseHandle: 'NONE', url: '192.168.1.100:8000', wrapAsMultipart: false
                     } catch (err) {
@@ -72,7 +72,6 @@ pipeline {
                         echo "No running container to stop."
                     }
                     sh 'docker image prune -a -f'
-                    currentBuild.result = 'SUCCESS'
                 }
             }
         }   
