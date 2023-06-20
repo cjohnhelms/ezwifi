@@ -71,7 +71,7 @@ pipeline {
                     } catch (err) {
                         echo "No running container to stop."
                     }
-                    sh 'docker image prune'
+                    sh 'docker image prune -a -f'
                 }
             }
         }   
