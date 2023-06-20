@@ -8,14 +8,26 @@ pipeline {
     stages {
         stage('Stop Existing') {
             steps {
-                echo 'Prechecks...'
-                sh 'docker stop wifi' || true
+                script {
+                    echo 'First precheck...'
+                    try {
+                        sh 'docker stop wifi'
+                    } catch (err) {
+                        echo "No running container to stop."
+                    }
+                }
             }
         }
         stage('Remove Existing') {
             steps {
-                echo 'Prechecks...'
-                sh 'docker rm wifi' || true
+                script {
+                    echo 'Second precheck...'
+                    try {
+                        sh 'docker stop wifi'
+                    } catch (err) {
+                        echo "No running container to stop."
+                    }
+                }
             }
         }
         stage('Build') {
@@ -51,8 +63,14 @@ pipeline {
         }
         stage('Cleanup') {
             steps {
-                echo 'Prechecks...'
-                sh 'docker stop wifi' || true
+                script {
+                    echo 'Prechecks...'
+                    try {
+                        sh 'docker stop wifi'
+                    } catch (err) {
+                        echo "No running container to stop."
+                    }
+                }
             }
         }   
     }
