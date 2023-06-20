@@ -11,7 +11,7 @@ pipeline {
                 echo 'Building..'
                 checkout poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/cjohnhelms/wifi-webserver']])
                 sh 'docker build -t docker.io/cjohnhelms/${NAME} .'
-                sh 'docker tag docker.io/cjohnhelms/${${NAME}:latest docker.io/cjohnhelms/${NAME}:${VERSION}'
+                sh 'docker tag docker.io/cjohnhelms/${NAME}:latest docker.io/cjohnhelms/${NAME}:${VERSION}'
             }
         }
         stage('Test') {
