@@ -6,13 +6,16 @@ pipeline {
     VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
     }   
     stages {
-        stage('Prechecks') {
+        stage('Stop Existing') {
             steps {
-                script {
-                    echo 'Prechecks...'
-                    sh 'docker stop wifi' || echo 'No container named "wifi" to stop. Proceeding...'
-                    sh 'docker rm wifi' || echo 'No container named "wifi" to remove. Proceeding...'
-                }
+                echo 'Prechecks...'
+                sh 'docker stop wifi' || true
+            }
+        }
+        stage('Remove Existing') {
+            steps {
+                echo 'Prechecks...'
+                sh 'docker rm wifi' || true
             }
         }
         stage('Build') {
@@ -48,11 +51,8 @@ pipeline {
         }
         stage('Cleanup') {
             steps {
-                script {
-                    echo 'Prechecks...'
-                    sh 'docker stop wifi' || echo 'No container named "wifi" to stop. Proceeding...'
-                    sh 'docker rm wifi' || echo 'No container named "wifi" to remove. Proceeding...'
-                }
+                echo 'Prechecks...'
+                sh 'docker stop wifi' || true
             }
         }   
     }
