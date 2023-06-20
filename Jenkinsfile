@@ -18,13 +18,13 @@ pipeline {
             steps {
                 script {
                     echo 'Testing..'
-                sh 'podman run -d --name wifi docker.io/cjohnhelms/${NAME}:latest -p 8000:80'
-                try {
+                    sh 'podman run -d --name wifi docker.io/cjohnhelms/${NAME}:latest -p 8000:80'
+                    try {
                     httpRequest ignoreSslErrors: true, responseHandle: 'NONE', url: '192.168.1.100:8000', wrapAsMultipart: false
-                } catch (err) {
+                    } catch (err) {
                     echo 'Container not running as expected'
                     currentBuild.result = 'FAILURE'
-                }
+                    }
                 }
             }
         }
