@@ -6,10 +6,11 @@ pipeline {
     VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
     }   
     stages {
-        stage('Pre-cleanup') {
+        stage('Prechecks') {
             steps {
-                echo 'Cleaning up...'
-                sh 'docker rm wifi'
+                echo 'Prechecks...'
+                sh 'docker stop wifi' || echo 'No container named "wifi" to stop. Proceeding...'
+                sh 'docker rm wifi' || echo 'No container named "wifi" to remove. Proceeding...'
             }
         }
         stage('Build') {
@@ -43,10 +44,11 @@ pipeline {
                 }
             }
         }
-        stage('Post-cleanup') {
+        stage('Cleanup') {
             steps {
-                echo 'Cleaning up...'
-                sh 'docker stop wifi'
+                echo "Cleaning up..."
+                sh 'docker stop wifi' || echo 'No container named "wifi" to stop. Proceeding...'
+                sh 'docker rm wifi' || echo 'No container named "wifi" to remove. Proceeding...'
             }
         }   
     }
