@@ -38,7 +38,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                    sh 'docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}'
                     sh 'docker push docker.io/cjohnhelms/wifi-webserver:latest'
                 }
             }
