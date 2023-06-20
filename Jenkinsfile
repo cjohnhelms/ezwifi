@@ -23,9 +23,9 @@ pipeline {
                 script {
                     echo 'Second precheck...'
                     try {
-                        sh 'docker stop wifi'
+                        sh 'docker rm wifi'
                     } catch (err) {
-                        echo "No running container to stop."
+                        echo "No container to remove."
                     }
                 }
             }
