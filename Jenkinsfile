@@ -8,9 +8,11 @@ pipeline {
     stages {
         stage('Prechecks') {
             steps {
-                echo 'Prechecks...'
-                sh 'docker stop wifi' || echo 'No container named "wifi" to stop. Proceeding...'
-                sh 'docker rm wifi' || echo 'No container named "wifi" to remove. Proceeding...'
+                script {
+                    echo 'Prechecks...'
+                    sh 'docker stop wifi' || echo 'No container named "wifi" to stop. Proceeding...'
+                    sh 'docker rm wifi' || echo 'No container named "wifi" to remove. Proceeding...'
+                }
             }
         }
         stage('Build') {
@@ -46,9 +48,11 @@ pipeline {
         }
         stage('Cleanup') {
             steps {
-                echo "Cleaning up..."
-                sh 'docker stop wifi' || echo 'No container named "wifi" to stop. Proceeding...'
-                sh 'docker rm wifi' || echo 'No container named "wifi" to remove. Proceeding...'
+                script {
+                    echo 'Prechecks...'
+                    sh 'docker stop wifi' || echo 'No container named "wifi" to stop. Proceeding...'
+                    sh 'docker rm wifi' || echo 'No container named "wifi" to remove. Proceeding...'
+                }
             }
         }   
     }
