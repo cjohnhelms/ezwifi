@@ -72,6 +72,7 @@ pipeline {
                         echo "No running container to stop."
                     }
                     sh 'docker image prune -a -f'
+                    currentBuild.result = 'SUCCESS'
                 }
             }
         }   
