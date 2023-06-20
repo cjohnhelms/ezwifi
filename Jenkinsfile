@@ -6,6 +6,12 @@ pipeline {
     VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
     }   
     stages {
+        stage('Pre-cleanup') {
+            steps {
+                echo 'Cleaning up...'
+                sh 'docker rm wifi'
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building..'
@@ -37,11 +43,10 @@ pipeline {
                 }
             }
         }
-        stage('Cleanup') {
+        stage('Post-cleanup') {
             steps {
                 echo 'Cleaning up...'
                 sh 'docker stop wifi'
-                sh 'docker rm wifi'
             }
         }   
     }
