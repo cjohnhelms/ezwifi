@@ -56,9 +56,10 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                    sh 'docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}'
-                    sh 'docker push docker.io/cjohnhelms/wifi-webserver:latest'
+                    sh 'docker login -u ${env.dockerHubUser} -p ${dockerHubPassword} docker.io'
                 }
+                sh 'docker push docker.io/cjohnhelms/${NAME}:latest'
+                sh 'docker push docker.io/cjohnhelms/${NAME}:${VERSION}'
             }
         }
         stage('Cleanup') {
@@ -70,6 +71,7 @@ pipeline {
                     } catch (err) {
                         echo "No running container to stop."
                     }
+                    sh 'docker image prune'
                 }
             }
         }   
