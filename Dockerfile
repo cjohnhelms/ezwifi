@@ -1,6 +1,6 @@
 FROM docker.io/nginx:latest
-COPY ./index.html /usr/share/nginx/html/index.html
-COPY ./files /usr/share/nginx/html/files
-COPY ./styles.css /usr/share/nginx/html/styles.css
+COPY ./app/index.html /usr/share/nginx/html/index.html
+COPY ./app/files /usr/share/nginx/html/files
+COPY ./app/styles.css /usr/share/nginx/html/styles.css
 
-EXPOSE 80
+EXPOSE 8000
