@@ -7,7 +7,7 @@ name: Docker
 
 on:
   release:
-    types: [publish]
+    types: [published]
 
 env:
   # github.repository as <account>/<repo>
